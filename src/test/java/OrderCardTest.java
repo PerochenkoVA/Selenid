@@ -8,8 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class OrderCardTest {
@@ -18,16 +17,14 @@ public class OrderCardTest {
     @Test
     void testApplication() {
         open("http://localhost:9999");
-        SelenideElement form = $("[data-test-id]");
-        form.$("[data-test-id = 'name'] input").setValue("Владимир");
+      //  SelenideElement form = $("[data-test-id]");
 
-        form.$("[data-test-id = name] input").setValue("+79268889977");
-        form.$("[data-test-id = agreement] input").click(); //чек бокс
-        form.$("[button]").click(); // кнопка "продолжить"
+        $("[data-test-id = 'name'] input").setValue("Владимир");
+        $("[data-test-id  = 'phone'] input").setValue("+79268889977");
+        $("[name = 'agreement'] input").click();
+        $("[class='button__text']").click();
 
-        //$("").shouldHave(exactText("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
+        $("").shouldHave(exactText("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
 
     }
-
-    private WebDriver driver;
 }
